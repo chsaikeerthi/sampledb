@@ -6,7 +6,7 @@ version: '3'
 
 services:
   web:
-    image: chsaikeerthi/sampledb:0.20.0
+    image: sciapp/sampledb:0.20.0
     restart: always
     container_name: sampledb
     # Note: this config option works with docker-compose version >1.27
@@ -23,7 +23,7 @@ services:
         - SAMPLEDB_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:password@sampledb-postgres:5432/postgres
         - SAMPLEDB_FILE_STORAGE_PATH=/home/sampledb/files/
         # uncomment the line below for development purposes
-        #- FLASK_ENV=development
+        - FLASK_ENV=development
     ports:
         # if you want sampledb to run on a different port, change the first number
         # host:container
@@ -32,6 +32,8 @@ services:
         # this is where you will keep the uploaded files persistently
         # host:container
         - ./files:/home/sampledb/files
+        # only for dev
+        - ./sampledb:/home/sampledb/sampledb
     networks:
       - sampledb-net
 
@@ -58,3 +60,6 @@ services:
 # the internal sampledb network
 networks:
   sampledb-net:
+
+alias sdb="docker exec -it sampledb sampledb"
+sdb set_up_demo
