@@ -61,5 +61,3 @@ services:
 networks:
   sampledb-net:
 
-alias sdb="docker exec -it sampledb sampledb"
-sdb set_up_demo
