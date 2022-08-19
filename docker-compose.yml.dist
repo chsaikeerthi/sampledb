@@ -60,4 +60,3 @@ services:
 # the internal sampledb network
 networks:
   sampledb-net:
-
